@@ -2,12 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images : {
-    remotePatterns : [
-      {
-        protocol : "https",
-        hostname : "ik.imagekit.io",
-        port : ""
-      }
+    domains : [
+      "pp4rrtf6k7.ufs.sh"
     ]
   }
 };
