@@ -20,8 +20,7 @@ const FileUpload = ({endpoint, value, onChange} : FileUploadProps) => {
         return (
             <div className="relative h-30 w-30">
                 <Image 
-                    width={30}
-                    height={30}
+                    fill
                     src={value}
                     alt="Upload"
                     className="rounded-full"
@@ -40,7 +39,7 @@ const FileUpload = ({endpoint, value, onChange} : FileUploadProps) => {
                 onChange(res?.[0].ufsUrl);
             }}
             onUploadError={(error : Error) => {
-                console.log(error)
+                alert(`ERROR! ${error.message}`);
             }}
         />
     );
