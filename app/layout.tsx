@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ModelProvider } from "@/components/model-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
             storageKey="discord-theme"
             disableTransitionOnChange
           >
+            <ModelProvider />
             {children}
           </ThemeProvider>
         </body>
