@@ -1,5 +1,6 @@
 "use client"
 
+import CreateChannelModel from "./models/CreateChannelModel";
 import CreateServerModel from "./models/createServerModel";
 import EditServerModel from "./models/EditServerModel";
 import InviteModel from "./models/InviteModel";
@@ -10,6 +11,7 @@ export const ModelProvider = () => {
     return (
         <>
             <CreateServerModel />
+            <CreateChannelModel />
             <InviteModel />
             <EditServerModel />
             <MembersModel />
