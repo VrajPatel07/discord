@@ -3,6 +3,7 @@
 import CreateServerModel from "./models/createServerModel";
 import EditServerModel from "./models/EditServerModel";
 import InviteModel from "./models/InviteModel";
+import MembersModel from "./models/MembersModel";
 
 
 export const ModelProvider = () => {
@@ -11,6 +12,7 @@ export const ModelProvider = () => {
             <CreateServerModel />
             <InviteModel />
             <EditServerModel />
+            <MembersModel />
         </>
     );
 }
