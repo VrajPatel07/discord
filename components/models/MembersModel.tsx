@@ -98,7 +98,7 @@ const MembersModel = () => {
 
                 <DialogHeader className="pt-8 px-6">
 
-                    <DialogTitle className="text-2xl text-center font-bold">Manager Members</DialogTitle>
+                    <DialogTitle className="text-2xl text-center font-bold">Members</DialogTitle>
 
                     <DialogDescription className="text-center text-zinc-500">
                         {server?.members?.length} Members
