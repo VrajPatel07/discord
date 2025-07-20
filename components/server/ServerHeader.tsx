@@ -30,7 +30,7 @@ export default function ServerHeader ({server, role} : ServerHeaderProps) {
                 {
                     isModerator && (
                         <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer" onClick={() => onOpen("invite", {server : server})}>
-                            Invite People
+                            Invite
                             <UserPlus className="h-4 w-4 ml-auto" />
                         </DropdownMenuItem>
                     )
@@ -38,7 +38,7 @@ export default function ServerHeader ({server, role} : ServerHeaderProps) {
                 {
                     isAdmin && (
                         <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer" onClick={() => onOpen("editServer", {server : server})}>
-                            Server Settings
+                            Settings
                             <Settings className="h-4 w-4 ml-auto" />
                         </DropdownMenuItem>
                     )
@@ -46,7 +46,7 @@ export default function ServerHeader ({server, role} : ServerHeaderProps) {
                 {
                     isAdmin && (
                         <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer" onClick={() => onOpen("members", {server : server})}>
-                            Manage Members
+                            Members
                             <Users className="h-4 w-4 ml-auto" />
                         </DropdownMenuItem>
                     )
@@ -54,7 +54,7 @@ export default function ServerHeader ({server, role} : ServerHeaderProps) {
                 {
                     isModerator && (
                         <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer" onClick={() => onOpen("createChannel", {server : server})}>
-                            Create Channel
+                            Channel
                             <PlusCircle className="h-4 w-4 ml-auto" />
                         </DropdownMenuItem>
                     )
@@ -64,16 +64,16 @@ export default function ServerHeader ({server, role} : ServerHeaderProps) {
                 }
                 {
                     isAdmin && (
-                        <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
-                            Delete Server
+                        <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer" onClick={() => onOpen("deleteServer", {server : server})}>
+                            Delete
                             <Trash className="h-4 w-4 ml-auto" />
                         </DropdownMenuItem>
                     )
                 }
                 {
                     !isAdmin && (
-                        <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
-                            Leave Server
+                        <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer" onClick={() => onOpen("leaveServer", {server : server})}>
+                            Leave
                             <LogOut className="h-4 w-4 ml-auto" />
                         </DropdownMenuItem>
                     )
