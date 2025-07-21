@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import { Channel, ChannelType, Server } from "@prisma/client";
 
-export type ModeType = "createServer" | "invite" | "editServer" | "members" | "createChannel" | 
+export type ModelType = "createServer" | "invite" | "editServer" | "members" | "createChannel" | 
                         "leaveServer" | "deleteServer" | "deleteChannel" | "editChannel";
 
 interface ModelData {
@@ -11,9 +11,9 @@ interface ModelData {
 }
 
 interface ModelStore {
-    type : ModeType | null;
+    type : ModelType | null;
     isOpen : boolean;
-    onOpen : (type : ModeType, data? : ModelData) => void;
+    onOpen : (type : ModelType, data? : ModelData) => void;
     onClose : () => void;
     data : ModelData;
 }
