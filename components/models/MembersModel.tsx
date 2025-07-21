@@ -76,13 +76,13 @@ const MembersModel = () => {
                 }
             });
 
-            console.log('API URL:', url);
-
             const response = await axios.put(url, {role : role});
 
-            router.refresh();
+            console.log(response.data)
 
             onOpen("members", {server : response.data});
+
+            router.refresh();
         }
         catch (error) {
             console.log(error);

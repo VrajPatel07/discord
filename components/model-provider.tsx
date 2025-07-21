@@ -2,7 +2,9 @@
 
 import CreateChannelModel from "./models/CreateChannelModel";
 import CreateServerModel from "./models/createServerModel";
+import DeleteChennalModel from "./models/DeleteChannelModel";
 import DeleteServerModel from "./models/DeleteServerModel";
+import EditChannelModel from "./models/EditChannelModel";
 import EditServerModel from "./models/EditServerModel";
 import InviteModel from "./models/InviteModel";
 import LeaveServerModel from "./models/LeaveServerModel";
@@ -19,6 +21,8 @@ export const ModelProvider = () => {
             <MembersModel />
             <LeaveServerModel />
             <DeleteServerModel />
+            <DeleteChennalModel />
+            <EditChannelModel />
         </>
     );
 }

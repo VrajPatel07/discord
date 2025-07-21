@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { ModeToggle } from "../mode-toggle";
 import { UserButton } from "@clerk/nextjs";
 
 import { currentProfile } from "@/lib/current-profile";
