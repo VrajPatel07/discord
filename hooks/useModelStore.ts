@@ -1,10 +1,11 @@
-import { Server } from "@prisma/client";
 import {create} from "zustand";
+import { ChannelType, Server } from "@prisma/client";
 
 export type ModeType = "createServer" | "invite" | "editServer" | "members" | "createChannel" | "leaveServer" | "deleteServer";
 
 interface ModelData {
     server? : Server;
+    channelType? : ChannelType
 }
 
 interface ModelStore {

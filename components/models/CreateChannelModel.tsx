@@ -16,6 +16,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ChannelType } from "@prisma/client";
 
 import { useModel } from "@/hooks/useModelStore";
+import { useEffect } from "react";
 
 
 
@@ -24,7 +25,7 @@ const formSchema = z.object({
         .min(3, {message : "Channel name should be of minimum 3 characters"})
         .max(30, {message : "Channel name should be of maximum 30 characters"})
         .refine(name => name !== "general", {message : "Channel name can't be 'general'"}),
-    type : z.enum(ChannelType)
+    type : z.nativeEnum(ChannelType)
 })
 
 
@@ -33,21 +34,35 @@ const CreateChannelModel = () => {
 
     const router = useRouter();
 
-    const {isOpen, onClose, type} = useModel();
+    const {isOpen, onClose, type, data} = useModel();
 
     const params = useParams();
 
     const isModelOpen = isOpen && type === "createChannel";
+    const {channelType} = data;
+
 
     const form = useForm({
         resolver : zodResolver(formSchema),
         defaultValues : {
             name : "",
-            type : ChannelType.TEXT
+            type : channelType || ChannelType.TEXT
         }
     });
 
+
+    useEffect(() => {
+        if(channelType) {
+            form.setValue("type", channelType);
+        }
+        else {
+            form.setValue("type", ChannelType.TEXT);
+        }
+    }, [channelType, form]);
+
+
     const isLoading = form.formState.isSubmitting;
+
 
     const submitHandler = async (values : z.infer<typeof formSchema>) => {
         try {
@@ -69,10 +84,12 @@ const CreateChannelModel = () => {
         }
     }
 
+
     const handleClose = () => {
         form.reset();
         onClose();
     }    
+
 
     return (
         <Dialog open={isModelOpen} onOpenChange={handleClose}>
@@ -96,7 +113,7 @@ const CreateChannelModel = () => {
                                         <FormControl>
                                             <Input 
                                                 disabled={isLoading}
-                                                className="bg-zinc-300/50 border-b-1 focus-visible:ring-1text-black focus-visible:ring-offset-0 "
+                                                className="bg-zinc-300/50 border-b-1 focus-visible:ring-1 text-black focus-visible:ring-offset-0 "
                                                 placeholder="Enter channel name"
                                                 {...field}
                                             />
@@ -115,7 +132,7 @@ const CreateChannelModel = () => {
                                         <Select
                                             disabled={isLoading}
                                             onValueChange={field.onChange}
-                                            defaultValue={ChannelType.TEXT}
+                                            defaultValue={field.value}
                                         >
                                             <FormControl>
                                                 <SelectTrigger className="bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 focus:ring-offset-0 capitalize outline-none">
