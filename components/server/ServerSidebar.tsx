@@ -35,7 +35,7 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
 
     const profile = await currentProfile();
 
-    const server = await db.server.findUnique({
+    const server = await db.server.findFirst({
         where: {
             id: serverId
         },
@@ -196,7 +196,11 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                             <div className="space-y-[2px]">
                                 {
                                     members.map((member) => (
-                                        <ServerMember key={member.id} server={server} member={member} />
+                                        <ServerMember 
+                                            key={member.id} 
+                                            currentUserId={profile?.id} 
+                                            member={member} 
+                                        />
                                     ))
                                 }
                             </div>

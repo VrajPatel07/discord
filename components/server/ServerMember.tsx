@@ -9,7 +9,7 @@ import UserAvatar from "../user-avatar";
 
 interface ServerMemberProps {
     member : Member & {profile : Profile};
-    server : Server;
+    currentUserId : string | undefined;
 }
 
 const iconMap = {
@@ -19,7 +19,7 @@ const iconMap = {
 }
 
 
-const ServerMember = ({member, server} : ServerMemberProps) => {
+const ServerMember = ({member, currentUserId} : ServerMemberProps) => {
 
     const params = useParams();
     const router = useRouter();
@@ -27,7 +27,9 @@ const ServerMember = ({member, server} : ServerMemberProps) => {
     const icon = iconMap[member.role];
 
     const clickHandler = () => {
-        router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
+        if (currentUserId !== member.profileId) {
+            router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
+        }
     }
 
     return (

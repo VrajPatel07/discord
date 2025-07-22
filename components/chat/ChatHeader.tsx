@@ -1,4 +1,5 @@
 import { Hash } from "lucide-react";
+import UserAvatar from "../user-avatar";
 
 
 interface ChatHeaderProps {
@@ -17,7 +18,12 @@ export default function ChatHeader({serverId, name, type, imageUrl} : ChatHeader
                 <Hash className="w-5 h-5 text-zinc-400 mr-1" />
             )
         }
-        <p className="font-semibold text-md text-white">{name}</p>
+        {
+          type === "conversation" && (
+              <UserAvatar src={imageUrl} className="h-8 w-8 md:h-8 md:w-8" />
+          )
+        }
+        <p className="font-semibold text-md text-white ml-2">{name}</p>
     </div>
   )
 }
