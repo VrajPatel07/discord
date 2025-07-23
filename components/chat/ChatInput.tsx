@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import axios from "axios";
 import qs from "query-string";
+import { Plus, Smile } from "lucide-react";
 
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { Plus, Smile } from "lucide-react";
 import { Input } from "../ui/input";
+
+import { useModel } from "@/hooks/useModelStore";
 
 
 interface ChatInputProps {
@@ -25,6 +27,8 @@ const formSchema = z.object({
 
 
 const ChatInput = ({apiUrl, query, name, type} : ChatInputProps) => {
+
+    const {onOpen} = useModel();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver : zodResolver(formSchema),
@@ -64,7 +68,7 @@ const ChatInput = ({apiUrl, query, name, type} : ChatInputProps) => {
 
                                     <button
                                         type="button"
-                                        onClick={() => {}}
+                                        onClick={() => onOpen("messageFile", { apiUrl : apiUrl, query : query })}
                                         className="absolute top-7 left-8 h-[24px] w-[24px] bg-zinc-400 hover:bg-zinc-300 transition rounded-full p-1 flex items-center justify-center"
                                     >
                                         <Plus className="text-[#313338]" />

@@ -2,12 +2,14 @@ import {create} from "zustand";
 import { Channel, ChannelType, Server } from "@prisma/client";
 
 export type ModelType = "createServer" | "invite" | "editServer" | "members" | "createChannel" | 
-                        "leaveServer" | "deleteServer" | "deleteChannel" | "editChannel";
+                        "leaveServer" | "deleteServer" | "deleteChannel" | "editChannel" | "messageFile";
 
 interface ModelData {
     server? : Server;
     channelType? : ChannelType;
     channel? : Channel;
+    apiUrl? : string;
+    query? : Record<string, any>
 }
 
 interface ModelStore {

@@ -9,6 +9,7 @@ import EditServerModel from "./models/EditServerModel";
 import InviteModel from "./models/InviteModel";
 import LeaveServerModel from "./models/LeaveServerModel";
 import MembersModel from "./models/MembersModel";
+import MessageFileModel from "./models/MessageFileModel";
 
 
 export const ModelProvider = () => {
@@ -23,6 +24,7 @@ export const ModelProvider = () => {
             <DeleteServerModel />
             <DeleteChennalModel />
             <EditChannelModel />
+            <MessageFileModel />
         </>
     );
 }
