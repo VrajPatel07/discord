@@ -1,11 +1,14 @@
 "use client";
 
+import { Fragment } from "react";
 import { Member, Message, Profile } from "@prisma/client";
+import { Loader2, ServerCrash } from "lucide-react";
+import {format} from "date-fns";
+
 
 import ChatWelcome from "./ChatWelcome";
 import { useChatQuery } from "@/hooks/useChatQuery";
-import { Loader2, ServerCrash } from "lucide-react";
-import { Fragment } from "react";
+import ChatItem from "./ChatItem";
 
 
 interface ChatMessagesProps {
@@ -25,6 +28,9 @@ type MessageType = Message & {
         profile : Profile
     }
 }
+
+
+const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
 
 const ChatMessages = ({name, member, chatId, apiUrl, socketQuery, socketUrl, paramKey, paramValue, type} : ChatMessagesProps) => {
@@ -70,9 +76,19 @@ const ChatMessages = ({name, member, chatId, apiUrl, socketQuery, socketUrl, par
                             <Fragment key={index}>
                                 {
                                     group.items.map((message : MessageType) => (
-                                        <div key={message.id}>
-                                            {message.content}
-                                        </div>
+                                        <ChatItem 
+                                            key={message.id}
+                                            id={message.id} 
+                                            currentMember={member}
+                                            member={message.member}
+                                            content={message.content}
+                                            fileUrl={message.fileUrl}
+                                            deleted={message.deleted}
+                                            timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                                            isUpdated={message.updatedAt !== message.createdAt}
+                                            socketUrl={socketUrl}
+                                            socketQuery={socketQuery}
+                                        />
                                     ))
                                 }
                             </Fragment>

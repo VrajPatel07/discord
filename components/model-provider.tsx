@@ -3,6 +3,7 @@
 import CreateChannelModel from "./models/CreateChannelModel";
 import CreateServerModel from "./models/createServerModel";
 import DeleteChennalModel from "./models/DeleteChannelModel";
+import DeleteMessageModel from "./models/DeleteMessageModel";
 import DeleteServerModel from "./models/DeleteServerModel";
 import EditChannelModel from "./models/EditChannelModel";
 import EditServerModel from "./models/EditServerModel";
@@ -25,6 +26,7 @@ export const ModelProvider = () => {
             <DeleteChennalModel />
             <EditChannelModel />
             <MessageFileModel />
+            <DeleteMessageModel />
         </>
     );
 }
