@@ -8,6 +8,7 @@ import qs from "query-string";
 import {useForm} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
+import { useRouter, useParams } from "next/navigation";
 
 import { Member, MemberRole, Profile } from "@prisma/client";
 
@@ -71,9 +72,23 @@ const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, currentMemb
     const isPDF = fileType === "pdf" && fileUrl;
     const isImage = !isPDF && fileUrl;
 
+    const isLoading = form.formState.isSubmitting;
+
+    const params = useParams();
+    const router = useRouter();
+
+
+    const onMemberClick = () => {
+        if (member.id !== currentMember.id) {
+            router.replace(`/servers/${params?.serverId}/conversations/${member.id}`);
+        }
+    }
+
+
     useEffect(() => {
         form.reset({ content : content });
     }, [content]);
+
 
     useEffect(() => {
         const handleKeyDown = (event : any) => {
@@ -81,11 +96,12 @@ const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, currentMemb
                 setIsEditing(false);
             }
         }
+
         window.addEventListener("keydown", handleKeyDown);
+
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [])
 
-    const isLoading = form.formState.isSubmitting;
 
     const submitHandler = async (values : z.infer<typeof formSchema>) => {
         try {
@@ -106,7 +122,7 @@ const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, currentMemb
         <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
             <div className="group flex gap-x-2 items-start w-full">
 
-                <div className="cursor-pointer hover:drop-shadow-md transition">
+                <div className="cursor-pointer hover:drop-shadow-md transition" onClick={onMemberClick}>
                     <UserAvatar src={member.profile.imageUrl} />
                 </div>
 
@@ -115,7 +131,7 @@ const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, currentMemb
                     <div className="flex items-center gap-x-2">
 
                         <div className="flex items-center">
-                            <p className="font-semibold text-sm hover:underline cursor-pointer">{member.profile.name}</p>
+                            <p className="font-semibold text-sm hover:underline cursor-pointer" onClick={onMemberClick}> {member.profile.name} </p>
                             <ActionTooltip label={member.role}>
                                 {roleIconMap[member.role]}
                             </ActionTooltip>

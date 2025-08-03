@@ -134,7 +134,7 @@ export default async function handler (req : NextApiRequest, res : NextAPIRespon
 
         }
 
-        const updateKey = `chat:${channelId}:message:update`;
+        const updateKey = `chat:${channelId}:messages:update`;
 
         res?.socket?.server?.io?.emit(updateKey, message);
 
